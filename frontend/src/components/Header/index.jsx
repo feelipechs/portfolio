@@ -20,8 +20,8 @@ const Header = ({ refs, scrollToSection }) => {
           <nav className="hidden md:flex md:items-center md:gap-6">
             {[
               { label: "Sobre mim", ref: refs.aboutRef },
-              { label: "Timeline", ref: refs.timelineRef },
-              { label: "Skills", ref: refs.skillsRef },
+              { label: "Linha do Tempo", ref: refs.timelineRef },
+              { label: "Habilidades", ref: refs.skillsRef },
               { label: "Projetos", ref: refs.projectsRef },
               { label: "Contato", ref: refs.contactRef },
             ].map((item) => (

@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-// import { forwardRef } from "react";
 
 const Projects = ({ refProps }) => {
   const [ activeTab, setActiveTab ] = useState("backend");
@@ -47,17 +46,17 @@ const Projects = ({ refProps }) => {
     ],
     fullstack: [
       { 
-        img: "/images/project-fullstack-01.png",
+        img: "/images/project-fullstack-01.webp",
         title: "TechHub",
         desc: "E-commerce desenvolvido com React, Spring e H2 Database, com autenticação de usuários via JWT. O sistema inclui CRUD de produtos, carrinho de compras, painel administrativo para gerenciamento de itens, além de validação de dados em diversas áreas.",
         repository: "https://github.com/feelipechs/TechHub",
       },
       {
         img: "/images/project-fullstack-02.webp",
-        title: "Achados e Perdidos",
-        desc: "A aplicação permite o cadastro de objetos perdidos e encontrados, com uma vitrine exibindo todos os itens postados. O dono do item pode removê-lo quando recuperá-lo. Desenvolvido com React, Node e MySQL.",
+        title: "SFSys",
+        desc: "O SFSys é uma aplicação de gestão completa e robusta desenvolvida para otimizar e centralizar as operações de ponta a ponta de uma ONG com foco em causas sociais, como a distribuição de alimentos.",
         site: "",
-        repository: "https://github.com/feelipechs/facul/tree/main/Programacao02/TrabalhoFinal",
+        repository: "https://github.com/feelipechs/SFSys",
       },
       {
         img: "/images/coming-soon.webp",

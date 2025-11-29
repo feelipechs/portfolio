@@ -18,14 +18,6 @@ function App() {
   const projectsRef = useRef();
   const contactRef = useRef();
 
-  // const scrollToSection = (ref) => {
-  //   if (!ref.current) return;
-  //   const top = ref.current.getBoundingClientRect().top + window.pageYOffset;
-  //   const offset = 60; // ajuste para a altura do Divider + margens
-  //   window.scrollTo({ top: top - offset, behavior: 'smooth' });
-  // };
-
-  // uso esse
   const scrollToSection = (ref) => {
     if (!ref.current) return;
 
@@ -54,9 +46,9 @@ function App() {
         </div>
         <Divider>Sobre Mim</Divider>
         <About refProps={aboutRef} />
-        <Divider>Timeline</Divider>
+        <Divider>Linha do Tempo</Divider>
         <Timeline refProps={timelineRef} />
-        <Divider>Skills</Divider>
+        <Divider>Habilidades</Divider>
         <Skills refProps={skillsRef} />
         <Divider>Projetos</Divider>
         <Projects refProps={projectsRef} />

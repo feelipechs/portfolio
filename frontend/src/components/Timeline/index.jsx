@@ -30,6 +30,11 @@ const Timeline = ({ refProps }) => {
       desc: "+praTi & Codifica Edu",
     },
     {
+      date: "04/2024 - 07/2024",
+      title: "Backend com Java",
+      desc: "DIO & Santander",
+    },
+    {
       date: "01/2021 - 06/2022",
       title: "Curso Técnico em Administração",
       desc: "Etec Alberto Santos Dumont",

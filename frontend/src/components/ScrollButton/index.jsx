@@ -9,8 +9,8 @@ const ScrollToTopButton = () => {
       const scrollPosition = window.pageYOffset + window.innerHeight;
       const pageHeight = document.documentElement.scrollHeight;
 
-      // mostra o botão quando chegar a 90% da página
-      setVisible(scrollPosition >= pageHeight * 0.9);
+      // mostra o botão quando chegar a 50% da página
+      setVisible(scrollPosition >= pageHeight * 0.5);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -26,7 +26,7 @@ const ScrollToTopButton = () => {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-8 right-8 p-3 rounded-full bg-teal-600 text-white shadow-lg hover:bg-teal-500 transition"
+      className="fixed bottom-8 right-8 p-3 rounded-full bg-indigo-600 text-white shadow-lg hover:bg-indigo-700 transition"
     >
       <FaArrowUp />
     </button>

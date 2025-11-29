@@ -8,6 +8,8 @@ import SpringLogo from "../../assets/spring";
 import SqlLogo from "../../assets/sql";
 import MysqlLogo from "../../assets/mysql";
 import DockerLogo from "../../assets/docker";
+import ApiLogo from "../../assets/api";
+import JwtLogo from "../../assets/jwt";
 
 import CssLogo from "../../assets/css";
 import HtmlLogo from "../../assets/html";
@@ -19,18 +21,31 @@ import TailwindLogo from "../../assets/tailwind";
 import FigmaLogo from "../../assets/figma";
 import GitLogo from "../../assets/git";
 import GithubLogo from "../../assets/github";
+import TrelloLogo from "../../assets/trello";
+
+import DiagramLogo from "../../assets/diagram";
+import DesignPatternsLogo from "../../assets/design-patterns";
+import DesignPrinciplesLogo from "../../assets/design-principles";
 
 const Skills = ({ refProps }) => {
   const [ activeTab, setActiveTab ] = useState("backend");
 
+const tabLabels = {
+    backend: "BACKEND",
+    frontend: "FRONTEND",
+    tools: "FERRAMENTAS",
+    swe: "ENG. DE SOFTWARE", 
+  };
+
   const skillsData = {
     backend: [
       { Svg: JavaLogo, label: "Java" },
-      { Svg: NodeLogo, label: "Node.js" },
-      { Svg: SpringLogo, label: "Spring Framework" },
+      { Svg: JavascriptLogo, label: "JavaScript" },
+      { Svg: SpringLogo, label: "Spring" },
       { Svg: SqlLogo, label: "SQL" },
       { Svg: MysqlLogo, label: "MySQL" },
-      { Svg: DockerLogo, label: "Docker" },
+      { Svg: ApiLogo, label: "API REST" },
+      { Svg: JwtLogo, label: "JWT" },
     ],
     frontend: [
       { Svg: CssLogo, label: "CSS" },
@@ -40,11 +55,18 @@ const Skills = ({ refProps }) => {
       { Svg: BootstrapLogo, label: "Bootstrap" },
       { Svg: TailwindLogo, label: "Tailwind" },
     ],
-    ferramentas: [
+    tools: [
       { Svg: FigmaLogo, label: "Figma" },
       { Svg: GitLogo, label: "Git" },
       { Svg: GithubLogo, label: "GitHub" },
+      { Svg: DockerLogo, label: "Docker" },
+      { Svg: TrelloLogo, label: "Trello" },
     ],
+    swe: [
+      { Svg: DiagramLogo, label: "Modelagem de Classes" },
+      { Svg: DesignPatternsLogo, label: "Padrões de Projeto" },
+      { Svg: DesignPrinciplesLogo, label: "Princípios de Projeto" },
+    ]
   };
 
   return (
@@ -56,7 +78,7 @@ const Skills = ({ refProps }) => {
             <span
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className="cursor-pointer font-semibold text-lg flex flex-col items-center w-36" // largura fixa
+              className="cursor-pointer font-semibold text-lg flex flex-col items-center" // largura fixa
             >
               <span
                 className={`border-b-2 px-1 text-center ${
@@ -65,7 +87,7 @@ const Skills = ({ refProps }) => {
                     : "border-transparent text-gray-400 hover:text-blue-400"
                 }`}
               >
-                {tab.toUpperCase()}
+                {tabLabels[tab]}
               </span>
             </span>
           ))}

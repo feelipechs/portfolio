@@ -2,23 +2,30 @@ import { useCallback } from 'react'
 import { useTerminalStore } from '../store/terminalStore'
 
 export function useTerminal() {
-  const store = useTerminalStore()
+  const lines = useTerminalStore((s) => s.lines)
+  const isTyping = useTerminalStore((s) => s.isTyping)
+  const currentDirectory = useTerminalStore((s) => s.currentDirectory)
+  const pushLine = useTerminalStore((s) => s.pushLine)
+  const typeCommand = useTerminalStore((s) => s.typeCommand)
+  const executeCommand = useTerminalStore((s) => s.executeCommand)
+  const clearLines = useTerminalStore((s) => s.clearLines)
 
   const submitCommand = useCallback(
     (cmd: string) => {
-      if (!cmd.trim() || store.isTyping) return
-      store.pushLine({ type: 'input', content: cmd })
-      store.executeCommand(cmd)
+      if (!cmd.trim() || isTyping) return
+      pushLine({ type: 'input', content: cmd })
+      executeCommand(cmd)
     },
-    [store]
+    [isTyping, pushLine, executeCommand]
   )
 
   return {
-    lines: store.lines,
-    isTyping: store.isTyping,
-    currentDirectory: store.currentDirectory,
+    lines,
+    isTyping,
+    currentDirectory,
+    pushLine,
+    typeCommand,
     submitCommand,
-    typeCommand: store.typeCommand,
-    clearLines: store.clearLines,
+    clearLines,
   }
 }

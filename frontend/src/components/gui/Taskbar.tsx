@@ -1,8 +1,9 @@
-import { useTerminalStore } from '../../store/terminalStore'
+import { useWindowStore } from '../../store/windowStore'
 import { useRadioStore } from '../../store/radioStore'
 
 export function Taskbar() {
-  const { windows, focusWindow, minimizeWindow, openWindow } = useTerminalStore()
+  const { windows, focusWindow, minimizeWindow } = useWindowStore()
+  const openWindow = useWindowStore((s) => s.openWindow)
   const { currentTrack, tracks } = useRadioStore()
 
   const handleRadioClick = () => {

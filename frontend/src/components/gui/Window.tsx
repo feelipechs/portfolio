@@ -1,9 +1,9 @@
 import { type ReactNode } from 'react'
 import { Rnd } from 'react-rnd'
 import { motion } from 'framer-motion'
-import type { WindowState } from '../../store/terminalStore'
+import type { WindowState } from '../../store/windowStore'
 import { useDraggable } from '../../hooks/useDraggable'
-import { useTerminalStore } from '../../store/terminalStore'
+import { useWindowStore } from '../../store/windowStore'
 
 interface WindowProps {
   window: WindowState
@@ -11,7 +11,7 @@ interface WindowProps {
 }
 
 export function Window({ window, children }: WindowProps) {
-  const { closeWindow, minimizeWindow, toggleMaximize } = useTerminalStore()
+  const { closeWindow, minimizeWindow, toggleMaximize } = useWindowStore()
   const { onDragStop, onResizeStop, onFocus } = useDraggable(window.id)
 
   if (window.isMinimized) return null

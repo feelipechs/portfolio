@@ -1,13 +1,11 @@
 import { create } from 'zustand';
 
 interface AppStore {
-  shutdown: boolean;
+  shutdownCount: number;
   triggerShutdown: () => void;
-  reset: () => void;
 }
 
 export const useAppStore = create<AppStore>((set) => ({
-  shutdown: false,
-  triggerShutdown: () => set({ shutdown: true }),
-  reset: () => set({ shutdown: false }),
+  shutdownCount: 0,
+  triggerShutdown: () => set((s) => ({ shutdownCount: s.shutdownCount + 1 })),
 }));

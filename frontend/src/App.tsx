@@ -4,6 +4,7 @@ import { BootSequence } from './components/boot/BootSequence';
 import { Terminal } from './components/terminal/Terminal';
 import { MobileView } from './components/mobile/MobileView';
 import { RadioPlayer } from './components/radio/RadioPlayer';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { useIsMobile } from './hooks/useIsMobile';
 import { useAppStore } from './store/appStore';
 
@@ -13,22 +14,21 @@ export default function App() {
   const [phase, setPhase] = useState<Phase>('zoom');
   const [returning, setReturning] = useState(false);
   const isMobile = useIsMobile();
-  const shutdown = useAppStore((s) => s.shutdown);
-  const reset = useAppStore((s) => s.reset);
+  const shutdownCount = useAppStore((s) => s.shutdownCount);
 
   useEffect(() => {
-    if (shutdown) {
-      setPhase('zoom');
-      setReturning(true);
-      reset();
-    }
-  }, [shutdown, reset]);
+    if (shutdownCount === 0) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setPhase('zoom');
+    setReturning(true);
+  }, [shutdownCount]);
 
   if (isMobile) {
     return <MobileView />;
   }
 
   return (
+    <ErrorBoundary>
     <div className='app'>
       {phase === 'zoom' && (
         <ZoomInScreen onComplete={() => setPhase('boot')} returning={returning} />
@@ -50,5 +50,6 @@ export default function App() {
       </div>
       <RadioPlayer />
     </div>
+    </ErrorBoundary>
   );
 }

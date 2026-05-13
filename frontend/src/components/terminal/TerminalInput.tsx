@@ -6,26 +6,23 @@ import {
   type ChangeEvent,
 } from 'react';
 import { projects } from '../../data/projects';
+import { useTerminalStore } from '../../store/terminalStore';
 
 interface TerminalInputProps {
-  currentDirectory: string;
-  isTyping: boolean;
   onSubmit: (cmd: string) => void;
 }
 
 const PROMPT = '❯';
 
-export function TerminalInput({
-  currentDirectory,
-  isTyping,
-  onSubmit,
-}: TerminalInputProps) {
+export function TerminalInput({ onSubmit }: TerminalInputProps) {
   const [value, setValue] = useState('');
   const [cursorPos, setCursorPos] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
   const [history, setHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
+  const currentDirectory = useTerminalStore((s) => s.currentDirectory);
+  const isTyping = useTerminalStore((s) => s.isTyping);
 
   useEffect(() => {
     if (!isTyping) inputRef.current?.focus();
@@ -73,7 +70,7 @@ export function TerminalInput({
     }
     if (e.key === 'Tab') {
       e.preventDefault();
-      if (!value.trim()) return; // não faz nada com input vazio
+      if (!value.trim()) return;
 
       const commands = [
         'help',
@@ -91,7 +88,6 @@ export function TerminalInput({
         ...projects.map((p) => `cd projetos/${p.id}`),
       ];
 
-      // filtra só os que começam com o que foi digitado
       const matches = commands.filter(
         (cmd) => cmd.startsWith(value) && cmd !== value
       );
@@ -99,14 +95,11 @@ export function TerminalInput({
       if (matches.length === 0) return;
 
       if (matches.length === 1) {
-        // único match — completa
         setValue(matches[0]);
         setCursorPos(matches[0].length);
         return;
       }
 
-      // múltiplos matches — completa até onde todos concordam
-      // ex: "cat " -> mostra "cat about.json", "cat skills.json", etc
       let common = matches[0];
       for (const match of matches.slice(1)) {
         let i = 0;
@@ -115,11 +108,9 @@ export function TerminalInput({
       }
 
       if (common.length > value.length) {
-        // tem prefixo comum maior que o atual — avança até ali
         setValue(common);
         setCursorPos(common.length);
       }
-      // se não tem como avançar, não faz nada
     }
     syncCursor();
   };
@@ -150,6 +141,7 @@ export function TerminalInput({
           onClick={syncCursor}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
+          aria-label='comando'
           spellCheck={false}
           autoComplete='off'
           autoCapitalize='off'

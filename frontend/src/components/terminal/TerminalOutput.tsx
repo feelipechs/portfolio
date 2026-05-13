@@ -1,19 +1,17 @@
 import { useEffect, useRef } from 'react';
 import type { TerminalLine } from '../../store/terminalStore';
+import { useTerminalStore } from '../../store/terminalStore';
 import { ProjectList } from './ProjectList';
 
 interface TerminalOutputProps {
   lines: TerminalLine[];
-  currentDirectory: string;
 }
 
 const PROMPT = '❯';
 
-export function TerminalOutput({
-  lines,
-  currentDirectory,
-}: TerminalOutputProps) {
+export function TerminalOutput({ lines }: TerminalOutputProps) {
   const bottomRef = useRef<HTMLDivElement>(null);
+  const currentDirectory = useTerminalStore((s) => s.currentDirectory);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -22,7 +20,6 @@ export function TerminalOutput({
   return (
     <div className='terminal-output'>
       {lines.map((line) => {
-        // case interativo — renderiza componente
         if (
           line.type === 'interactive' &&
           line.interactive?.component === 'project-list'
@@ -34,7 +31,6 @@ export function TerminalOutput({
           );
         }
 
-        // linhas normais — comportamento atual
         return (
           <div
             key={line.id}

@@ -14,81 +14,32 @@ export function MusicPlayerWindow() {
   } = useRadioStore();
 
   return (
-    <div
-      style={{
-        fontFamily: "'Share Tech Mono', monospace",
-        fontSize: '13px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '16px',
-        height: '100%',
-      }}
-    >
-      <div style={{ textAlign: 'center', padding: '12px 0' }}>
-        <div
-          style={{
-            color: '#b06ef3',
-            fontSize: '11px',
-            letterSpacing: '3px',
-            textTransform: 'uppercase',
-            marginBottom: '4px',
-          }}
-        >
-          tocando agora
-        </div>
-        <div
-          style={{
-            color: '#f3f4f6',
-            fontSize: '16px',
-            letterSpacing: '2px',
-          }}
-        >
+    <div className='music-player'>
+      <div className='music-player__now-playing'>
+        <div className='music-player__label'>tocando agora</div>
+        <div className='music-player__track-name'>
           {tracks[currentTrack]?.name ?? '---'}
         </div>
       </div>
 
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '16px',
-        }}
-      >
-        <button
-          onClick={prev}
-          style={btnStyle}
-          title='anterior'
-        >
+      <div className='music-player__controls'>
+        <button onClick={prev} className='music-player__btn' title='anterior'>
           ⏮
         </button>
         <button
           onClick={toggle}
-          style={{ ...btnStyle, fontSize: '20px', padding: '6px 18px' }}
+          className='music-player__btn music-player__btn--play'
           title={isPlaying ? 'pausar' : 'tocar'}
         >
           {isPlaying ? '⏸' : '▶'}
         </button>
-        <button
-          onClick={next}
-          style={btnStyle}
-          title='próxima'
-        >
+        <button onClick={next} className='music-player__btn' title='próxima'>
           ⏭
         </button>
       </div>
 
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px',
-          padding: '0 8px',
-        }}
-      >
-        <span style={{ color: '#888', fontSize: '11px', letterSpacing: '1px' }}>
-          vol
-        </span>
+      <div className='music-player__volume'>
+        <span className='music-player__volume-label'>vol</span>
         <input
           type='range'
           min='0'
@@ -96,52 +47,19 @@ export function MusicPlayerWindow() {
           step='0.05'
           value={volume}
           onChange={(e) => setVolume(parseFloat(e.target.value))}
-          style={{
-            flex: 1,
-            accentColor: '#b06ef3',
-            height: '4px',
-            cursor: 'pointer',
-          }}
+          className='music-player__slider'
         />
-        <span style={{ color: '#888', fontSize: '11px', minWidth: '28px', textAlign: 'right' }}>
-          {Math.round(volume * 100)}
-        </span>
+        <span className='music-player__volume-value'>{Math.round(volume * 100)}</span>
       </div>
 
-      <div style={{ borderTop: '1px solid #2e303a', margin: '4px 0' }} />
+      <div className='music-player__divider' />
 
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '2px',
-          overflow: 'auto',
-          flex: 1,
-        }}
-      >
+      <div className='music-player__playlist'>
         {tracks.map((t, i) => (
           <button
             key={t.file}
             onClick={() => setTrack(i)}
-            style={{
-              background: i === currentTrack ? 'rgba(176, 110, 243, 0.12)' : 'transparent',
-              border: 'none',
-              borderRadius: '4px',
-              padding: '6px 10px',
-              fontFamily: "'Share Tech Mono', monospace",
-              fontSize: '13px',
-              color: i === currentTrack ? '#b06ef3' : '#9ca3af',
-              cursor: 'pointer',
-              textAlign: 'left',
-              letterSpacing: '1px',
-              transition: 'background 0.15s',
-            }}
-            onMouseEnter={(e) => {
-              if (i !== currentTrack) e.currentTarget.style.background = 'rgba(176, 110, 243, 0.06)';
-            }}
-            onMouseLeave={(e) => {
-              if (i !== currentTrack) e.currentTarget.style.background = 'transparent';
-            }}
+            className={`music-player__track-item${i === currentTrack ? ' music-player__track-item--active' : ''}`}
           >
             {i + 1}. {t.name}
           </button>
@@ -150,16 +68,3 @@ export function MusicPlayerWindow() {
     </div>
   );
 }
-
-const btnStyle: React.CSSProperties = {
-  background: 'transparent',
-  border: '1px solid rgba(176, 110, 243, 0.3)',
-  borderRadius: '4px',
-  color: '#b06ef3',
-  cursor: 'pointer',
-  fontSize: '14px',
-  padding: '4px 12px',
-  fontFamily: "'Share Tech Mono', monospace",
-  transition: 'all 0.15s',
-  lineHeight: 1,
-};

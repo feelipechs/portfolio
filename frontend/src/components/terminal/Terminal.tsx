@@ -5,11 +5,9 @@ import { TerminalOutput } from './TerminalOutput';
 import { TerminalInput } from './TerminalInput';
 import { WindowManager } from '../gui/WindowManager';
 import { useTerminal } from '../../hooks/useTerminal';
-import { useTerminalStore } from '../../store/terminalStore';
 
 export function Terminal() {
-  const { lines, isTyping, currentDirectory, submitCommand } = useTerminal();
-  const { pushLine, typeCommand } = useTerminalStore();
+  const { lines, submitCommand, pushLine, typeCommand } = useTerminal();
   const initialized = useRef(false);
 
   useEffect(() => {
@@ -38,8 +36,8 @@ export function Terminal() {
       <div className='terminal-container'>
         <MenuBar />
         <div className='terminal-body'>
-          <TerminalOutput lines={lines} currentDirectory={currentDirectory} />
-          <TerminalInput currentDirectory={currentDirectory} isTyping={isTyping} onSubmit={submitCommand} />
+          <TerminalOutput lines={lines} />
+          <TerminalInput onSubmit={submitCommand} />
         </div>
       </div>
 

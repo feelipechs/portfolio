@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
-import { useTerminalStore } from '../store/terminalStore'
+import { useWindowStore } from '../store/windowStore'
 
 export function useDraggable(windowId: string) {
-  const { updateWindowPosition, updateWindowSize, focusWindow } = useTerminalStore()
+  const { updateWindowPosition, updateWindowSize, focusWindow } = useWindowStore()
 
   const onDragStop = useCallback(
     (_e: unknown, d: { x: number; y: number }) => {

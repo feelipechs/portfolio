@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { nanoid } from 'nanoid';
 import { getCommandRegistry } from '../components/terminal/CommandRegistry';
+import { useAppStore } from './appStore';
 
 export interface TerminalLine {
   id: string;
@@ -13,7 +14,7 @@ export interface TerminalLine {
 
 export interface WindowState {
   id: string;
-  type: 'project' | 'about' | 'skills' | 'contact' | 'experience';
+  type: 'project' | 'about' | 'skills' | 'contact' | 'experience' | 'radio';
   title: string;
   position: { x: number; y: number };
   size: { width: number; height: number };
@@ -58,6 +59,7 @@ const WINDOW_DEFAULTS: Record<
   project: { title: 'project', size: { width: 620, height: 500 } },
   contact: { title: 'contactjson', size: { width: 480, height: 360 } },
   experience: { title: 'experience.json', size: { width: 600, height: 520 } },
+  radio: { title: 'radio.json', size: { width: 380, height: 360 } },
 };
 
 export const useTerminalStore = create<TerminalStore>((set, get) => ({
@@ -103,6 +105,7 @@ export const useTerminalStore = create<TerminalStore>((set, get) => ({
       openWindow: store.openWindow,
       clearLines: store.clearLines,
       currentDirectory: store.currentDirectory,
+      triggerShutdown: () => useAppStore.getState().triggerShutdown(),
     })(cmd.trim());
   },
 

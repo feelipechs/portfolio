@@ -1,9 +1,18 @@
 import { useTerminalStore } from '../../store/terminalStore'
+import { useRadioStore } from '../../store/radioStore'
 
 export function Taskbar() {
-  const { windows, focusWindow, minimizeWindow } = useTerminalStore()
+  const { windows, focusWindow, minimizeWindow, openWindow } = useTerminalStore()
+  const { currentTrack, tracks } = useRadioStore()
 
-  if (windows.length === 0) return null
+  const handleRadioClick = () => {
+    const existing = windows.find((w) => w.type === 'radio')
+    if (existing) {
+      focusWindow(existing.id)
+    } else {
+      openWindow('radio')
+    }
+  }
 
   return (
     <div className="taskbar">
@@ -17,6 +26,16 @@ export function Taskbar() {
           <span className="taskbar-label">{w.title}</span>
         </button>
       ))}
+      <div style={{ flex: 1 }} />
+      <button
+        className="taskbar-item"
+        onClick={handleRadioClick}
+        title={`rádio: ${tracks[currentTrack]?.name ?? '---'}`}
+        style={{ flexShrink: 0 }}
+      >
+        <span className="taskbar-icon">♪</span>
+        <span className="taskbar-label">rádio</span>
+      </button>
     </div>
   )
 }

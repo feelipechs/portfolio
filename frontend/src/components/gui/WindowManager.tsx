@@ -6,6 +6,7 @@ import { SkillsWindow } from '../windows/SkillsWindow';
 import { ProjectWindow } from '../windows/ProjectWindow';
 import { ExperienceWindow } from '../windows/ExperienceWindow';
 import { ContactWindow } from '../windows/ContactWindow';
+import { MusicPlayerWindow } from '../windows/MusicPlayerWindow';
 import type { Project } from '../../data/projects';
 
 export function WindowManager() {
@@ -23,6 +24,7 @@ export function WindowManager() {
             )}
             {win.type === 'experience' && <ExperienceWindow />}
             {win.type === 'contact' && <ContactWindow />}
+            {win.type === 'radio' && <MusicPlayerWindow />}
           </Window>
         ))}
       </AnimatePresence>

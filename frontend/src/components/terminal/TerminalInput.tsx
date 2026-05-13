@@ -85,6 +85,9 @@ export function TerminalInput({
         'cat experience.json',
         'cat skills.json',
         'cat contact.json',
+        'cat radio.json',
+        'shutdown',
+        'exit',
         ...projects.map((p) => `cd projetos/${p.id}`),
       ];
 

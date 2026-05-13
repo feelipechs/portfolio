@@ -1,17 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 import { SiReact } from 'react-icons/si';
+import { useRadioStore } from '../../store/radioStore';
 
 interface ZoomInScreenProps {
   onComplete: () => void;
+  returning?: boolean;
 }
 
-export function ZoomInScreen({ onComplete }: ZoomInScreenProps) {
+export function ZoomInScreen({ onComplete, returning }: ZoomInScreenProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const monitorRef = useRef<SVGRectElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const [started, setStarted] = useState(false);
   const [poweredOn, setPoweredOn] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!returning);
+  const radioToggle = useRadioStore((s) => s.toggle);
   const [loadingPhase, setLoadingPhase] = useState<'booting' | 'ready'>('booting');
   const rainAudioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -46,8 +49,8 @@ export function ZoomInScreen({ onComplete }: ZoomInScreenProps) {
     if (!rainLeft || !rainRight) return;
 
     const wins = [
-      { el: rainLeft, x: 1482, y: 198, w: 119, h: 244 },
-      { el: rainRight, x: 1620, y: 198, w: 113, h: 244 },
+      { el: rainLeft, x: 1486, y: 201, w: 117, h: 239 },
+      { el: rainRight, x: 1625, y: 201, w: 111, h: 239 },
     ];
 
     const COUNT = 35;
@@ -179,10 +182,10 @@ export function ZoomInScreen({ onComplete }: ZoomInScreenProps) {
       >
         <defs>
           <clipPath id='window-left-clip'>
-            <rect x='1482' y='198' width='119' height='244' />
+            <rect x='1486' y='201' width='117' height='239' />
           </clipPath>
           <clipPath id='window-right-clip'>
-            <rect x='1620' y='198' width='113' height='244' />
+            <rect x='1625' y='201' width='111' height='239' />
           </clipPath>
         </defs>
 
@@ -205,7 +208,7 @@ export function ZoomInScreen({ onComplete }: ZoomInScreenProps) {
             fill='#04040e'
             rx='3'
           />
-          <foreignObject x='761' y='446' width='395' height='164'>
+          <foreignObject x='760' y='445' width='397' height='166'>
             <div {...{ xmlns: 'http://www.w3.org/1999/xhtml' }} style={{
                 width: '100%',
                 height: '100%',
@@ -223,32 +226,21 @@ export function ZoomInScreen({ onComplete }: ZoomInScreenProps) {
                     transition: 'opacity 0.5s ease-in',
                   }} />
               ) : (
-                <button
+                <span
                   onClick={handleStart}
                   style={{
-                    background: 'transparent',
-                    border: '1px solid rgba(176, 110, 243, 0.4)',
-                    borderRadius: '4px',
-                    padding: '8px 24px',
                     fontFamily: "'Share Tech Mono', monospace",
-                    fontSize: '15px',
+                    fontSize: '20px',
                     color: '#b06ef3',
-                    letterSpacing: '5px',
+                    letterSpacing: '6px',
                     textTransform: 'uppercase',
                     cursor: 'pointer',
-                    transition: 'all 0.25s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#b06ef3';
-                    e.currentTarget.style.boxShadow = '0 0 16px rgba(176, 110, 243, 0.25)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(176, 110, 243, 0.4)';
-                    e.currentTarget.style.boxShadow = 'none';
+                    animation: 'neonPulse 2s ease-in-out infinite',
+                    textShadow: '0 0 7px #b06ef3, 0 0 10px #b06ef3, 0 0 21px #b06ef3',
                   }}
                 >
                   ACESSAR
-                </button>
+                </span>
               )}
             </div>
           </foreignObject>
@@ -268,130 +260,38 @@ export function ZoomInScreen({ onComplete }: ZoomInScreenProps) {
         <g clipPath='url(#window-left-clip)' id='rain-left' />
         <g clipPath='url(#window-right-clip)' id='rain-right' />
 
-        <g transform='translate(1580, 860) scale(0.65)'>
-          <g
-            style={{
-              transformOrigin: '60px 108px',
-              animation: 'tailWag 1.4s ease-in-out infinite',
-            }}
-          >
-            <path
-              d='M 148 108 Q 175 85 185 68'
-              fill='none'
-              stroke='#ff00cc'
-              strokeWidth='5'
-              strokeLinecap='round'
-            />
-            <circle cx='185' cy='66' r='7' fill='#ff00cc' opacity='0.9' />
-            <circle
-              cx='185'
-              cy='66'
-              r='10'
-              fill='none'
-              stroke='#ff00cc'
-              strokeWidth='1.5'
-              opacity='0.5'
-              style={{ animation: 'nosePulse 1s ease-in-out infinite' }}
-            />
-          </g>
+        <g id='smoke-group'>
+          <circle cx='1200' cy='615' r='7' fill='#ccc' className='smoke' style={{ animationDelay: '0s' }} />
+          <circle cx='1210' cy='618' r='5' fill='#ccc' className='smoke' style={{ animationDelay: '0.8s' }} />
+          <circle cx='1195' cy='610' r='4' fill='#ccc' className='smoke' style={{ animationDelay: '1.6s' }} />
+          <circle cx='1205' cy='605' r='3' fill='#ccc' className='smoke' style={{ animationDelay: '2.4s' }} />
+        </g>
 
+        <foreignObject x='636' y='624' width='36' height='26'>
+          <div {...{ xmlns: 'http://www.w3.org/1999/xhtml' }} className='speaker-box' onClick={radioToggle} />
+        </foreignObject>
+
+        <g id='zzz-group'>
           <g>
-            <rect x='55' y='138' width='28' height='20' rx='5' fill='#12121e' stroke='#ff00cc' strokeWidth='1.5' />
-            <line x1='55' y1='148' x2='83' y2='148' stroke='rgba(0,200,255,0.45)' strokeWidth='2' />
-            <rect x='44' y='154' width='24' height='16' rx='4' fill='#12121e' stroke='#ff00cc' strokeWidth='1.5' />
-            <rect x='38' y='168' width='34' height='10' rx='5' fill='#1a0a1a' stroke='#ff00cc' strokeWidth='1.5' />
-            <line x1='50' y1='178' x2='50' y2='170' stroke='rgba(0,200,255,0.3)' strokeWidth='1' />
-            <line x1='60' y1='178' x2='60' y2='170' stroke='rgba(0,200,255,0.3)' strokeWidth='1' />
+            <text x='1400' y='810' fill='#006ac9' fontSize='14' fontFamily='monospace'>
+              Z
+              <animate attributeName='opacity' values='0;1;1;0' keyTimes='0;0.1;0.7;1' dur='3.5s' repeatCount='indefinite' />
+            </text>
+            <animateTransform attributeName='transform' type='translate' values='0,0;0,-40' dur='3.5s' repeatCount='indefinite' />
           </g>
-
           <g>
-            <rect x='147' y='138' width='28' height='20' rx='5' fill='#12121e' stroke='#ff00cc' strokeWidth='1.5' />
-            <line x1='147' y1='148' x2='175' y2='148' stroke='rgba(0,200,255,0.45)' strokeWidth='2' />
-            <rect x='162' y='154' width='24' height='16' rx='4' fill='#12121e' stroke='#ff00cc' strokeWidth='1.5' />
-            <rect x='158' y='168' width='34' height='10' rx='5' fill='#1a0a1a' stroke='#ff00cc' strokeWidth='1.5' />
-            <line x1='170' y1='178' x2='170' y2='170' stroke='rgba(0,200,255,0.3)' strokeWidth='1' />
-            <line x1='180' y1='178' x2='180' y2='170' stroke='rgba(0,200,255,0.3)' strokeWidth='1' />
+            <text x='1420' y='790' fill='#006ac9' fontSize='18' fontFamily='monospace'>
+              Z
+              <animate attributeName='opacity' values='0;1;1;0' keyTimes='0;0.1;0.7;1' dur='3.5s' begin='1.2s' repeatCount='indefinite' />
+            </text>
+            <animateTransform attributeName='transform' type='translate' values='0,0;0,-40' dur='3.5s' begin='1.2s' repeatCount='indefinite' />
           </g>
-
-          <rect x='68' y='105' width='94' height='70' rx='10' fill='#12121e' stroke='#ff00cc' strokeWidth='1.8' />
-          <rect x='78' y='115' width='74' height='50' rx='5' fill='none' stroke='rgba(0,200,255,0.18)' strokeWidth='1' />
-          <line
-            x1='82'
-            y1='132'
-            x2='148'
-            y2='132'
-            stroke='#00ccff'
-            strokeWidth='2'
-            opacity='.4'
-            style={{ animation: 'stripePulse 2s ease-in-out infinite' }}
-          />
-
-          <circle cx='88' cy='120' r='2.8' fill='#00ccff' style={{ animation: 'dotP 1.5s ease-in-out infinite' }} />
-          <circle
-            cx='99'
-            cy='120'
-            r='2.8'
-            fill='#ff00cc'
-            style={{ animation: 'dotP 1.5s ease-in-out infinite', animationDelay: '0.3s' }}
-          />
-          <circle
-            cx='110'
-            cy='120'
-            r='2.8'
-            fill='#7700ff'
-            style={{ animation: 'dotP 1.5s ease-in-out infinite', animationDelay: '0.6s' }}
-          />
-
-          <rect x='78' y='170' width='22' height='40' rx='5' fill='#12121e' stroke='#ff00cc' strokeWidth='1.5' />
-          <line x1='78' y1='188' x2='100' y2='188' stroke='rgba(0,200,255,0.45)' strokeWidth='2' />
-          <rect x='72' y='207' width='32' height='11' rx='5' fill='#1a0a1a' stroke='#ff00cc' strokeWidth='1.5' />
-          <line x1='84' y1='218' x2='84' y2='209' stroke='rgba(0,200,255,0.3)' strokeWidth='1' />
-          <line x1='94' y1='218' x2='94' y2='209' stroke='rgba(0,200,255,0.3)' strokeWidth='1' />
-
-          <rect x='130' y='170' width='22' height='40' rx='5' fill='#12121e' stroke='#ff00cc' strokeWidth='1.5' />
-          <line x1='130' y1='188' x2='152' y2='188' stroke='rgba(0,200,255,0.45)' strokeWidth='2' />
-          <rect x='126' y='207' width='32' height='11' rx='5' fill='#1a0a1a' stroke='#ff00cc' strokeWidth='1.5' />
-          <line x1='138' y1='218' x2='138' y2='209' stroke='rgba(0,200,255,0.3)' strokeWidth='1' />
-          <line x1='148' y1='218' x2='148' y2='209' stroke='rgba(0,200,255,0.3)' strokeWidth='1' />
-
-          <rect x='100' y='82' width='30' height='26' rx='4' fill='#0e0e1a' stroke='rgba(255,0,200,0.55)' strokeWidth='1.5' />
-          <line x1='104' y1='92' x2='126' y2='92' stroke='rgba(0,200,255,0.4)' strokeWidth='1.5' />
-
-          <g style={{ transformOrigin: '115px 105px', animation: 'headNod 4s ease-in-out infinite' }}>
-            <g style={{ transformOrigin: '84px 60px', animation: 'earL 4s ease-in-out infinite' }}>
-              <polygon points='76,42 96,42 90,18' fill='#12121e' stroke='#ff00cc' strokeWidth='1.5' />
-              <line x1='84' y1='40' x2='87' y2='25' stroke='rgba(0,200,255,0.3)' strokeWidth='1' />
-            </g>
-            <g style={{ transformOrigin: '146px 60px', animation: 'earR 4s ease-in-out infinite' }}>
-              <polygon points='134,42 154,42 140,18' fill='#12121e' stroke='#ff00cc' strokeWidth='1.5' />
-              <line x1='146' y1='40' x2='143' y2='25' stroke='rgba(0,200,255,0.3)' strokeWidth='1' />
-            </g>
-            <line x1='115' y1='32' x2='115' y2='8' stroke='#00ccff' strokeWidth='2' opacity='.8' />
-            <circle cx='115' cy='6' r='5' fill='#00ccff' style={{ animation: 'antPulse 1.2s ease-in-out infinite' }} />
-            <g style={{ animation: 'dataStream 4s ease-in-out infinite' }}>
-              <text x='108' y='4' fill='#00ccff' fontSize='7' fontFamily='monospace' opacity='.9'>
-                01
-              </text>
-              <text x='108' y='-6' fill='#00ccff' fontSize='7' fontFamily='monospace' opacity='.7'>
-                11
-              </text>
-            </g>
-            <rect x='76' y='32' width='78' height='58' rx='8' fill='#12121e' stroke='#ff00cc' strokeWidth='1.8' />
-            <rect x='84' y='40' width='62' height='42' rx='4' fill='none' stroke='rgba(0,200,255,0.13)' strokeWidth='1' />
-            <rect x='84' y='44' width='62' height='18' rx='3' fill='#000' stroke='#00ccff' strokeWidth='1.2' />
-            <rect x='84' y='44' width='62' height='18' rx='3' fill='none' />
-            <g style={{ transformOrigin: '97px 58px', animation: 'eyeBlink 4s ease-in-out infinite' }}>
-              <rect x='90' y='48' width='14' height='10' rx='2' fill='#00ccff' />
-              <rect x='90' y='48' width='14' height='10' rx='2' fill='none' stroke='rgba(255,255,255,0.3)' strokeWidth='0.5' />
-            </g>
-            <g style={{ transformOrigin: '133px 55px', animation: 'eyeBlink 4s ease-in-out infinite' }}>
-              <rect x='126' y='48' width='14' height='10' rx='2' fill='#00ccff' />
-              <rect x='126' y='48' width='14' height='10' rx='2' fill='none' stroke='rgba(255,255,255,0.3)' strokeWidth='0.5' />
-            </g>
-            <rect x='101' y='68' width='28' height='16' rx='5' fill='#0a0a16' stroke='rgba(255,0,200,0.45)' strokeWidth='1.2' />
-            <rect x='109' y='71' width='12' height='7' rx='2' fill='#ff00cc' style={{ animation: 'nosePulse 2s ease-in-out infinite' }} />
-            <line x1='115' y1='78' x2='109' y2='83' stroke='rgba(255,0,200,0.5)' strokeWidth='1' strokeLinecap='round' />
-            <line x1='115' y1='78' x2='121' y2='83' stroke='rgba(255,0,200,0.5)' strokeWidth='1' strokeLinecap='round' />
+          <g>
+            <text x='1445' y='765' fill='#006ac9' fontSize='22' fontFamily='monospace'>
+              Z
+              <animate attributeName='opacity' values='0;1;1;0' keyTimes='0;0.1;0.7;1' dur='3.5s' begin='2.4s' repeatCount='indefinite' />
+            </text>
+            <animateTransform attributeName='transform' type='translate' values='0,0;0,-40' dur='3.5s' begin='2.4s' repeatCount='indefinite' />
           </g>
         </g>
 

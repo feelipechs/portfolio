@@ -7,11 +7,12 @@ type StoreSnapshot = {
     interactive?: { component: 'project-list' };
   }) => void;
   openWindow: (
-    type: 'project' | 'about' | 'experience' | 'skills' | 'contact',
+    type: 'project' | 'about' | 'experience' | 'skills' | 'contact' | 'radio',
     data?: unknown
   ) => void;
   clearLines: () => void;
   currentDirectory: string;
+  triggerShutdown: () => void;
 };
 
 type CommandHandler = (args: string[], store: StoreSnapshot) => void;
@@ -28,9 +29,11 @@ const COMMANDS: Record<string, CommandHandler> = {
     '│  cat experience.json  minha trajetória              │',
     '│  cat skills.json      minhas habilidades            │',
     '│  cat contact.json     informações de contato        │',
+    '│  cat radio.json       web radio player              │',
     '│  cd projetos/[id]     abre projeto específico       │',
     '│  whoami               identidade do desenvolvedor   │',
     '│  clear                limpa o terminal              │',
+    '│  shutdown / exit      desligar o sistema            │',
     '└─────────────────────────────────────────────────────┘',
   ]
     lines.forEach((content) =>
@@ -79,6 +82,10 @@ const COMMANDS: Record<string, CommandHandler> = {
         openWindow('contact');
         pushLine({ type: 'system', content: '→ abrindo contact.json...' });
         break;
+      case 'radio.json':
+        openWindow('radio');
+        pushLine({ type: 'system', content: '→ abrindo radio.json...' });
+        break;
       default:
         pushLine({
           type: 'error',
@@ -126,6 +133,20 @@ const COMMANDS: Record<string, CommandHandler> = {
 
   clear: (_args, { clearLines }) => {
     clearLines();
+  },
+
+  shutdown: (_args, { pushLine, triggerShutdown }) => {
+    pushLine({ type: 'blank', content: '' });
+    pushLine({ type: 'system', content: '→ desligando sistema...' });
+    pushLine({ type: 'blank', content: '' });
+    setTimeout(triggerShutdown, 800);
+  },
+
+  exit: (_args, { pushLine, triggerShutdown }) => {
+    pushLine({ type: 'blank', content: '' });
+    pushLine({ type: 'system', content: '→ encerrando sessão...' });
+    pushLine({ type: 'blank', content: '' });
+    setTimeout(triggerShutdown, 800);
   },
 };
 

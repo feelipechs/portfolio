@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { FiMail, FiFileText } from 'react-icons/fi';
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { about } from '../../data/about';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
@@ -35,7 +37,7 @@ export function ContactWindow() {
     <div className='contact-window'>
       <div className='contact-links'>
         <a href={`mailto:${about.contacts.email}`} className='contact-link'>
-          <span className='contact-link-icon'>📧</span>
+          <span className='contact-link-icon'><FiMail size={14} /></span>
           <span>{about.contacts.email}</span>
         </a>
         <a
@@ -44,7 +46,7 @@ export function ContactWindow() {
           rel='noopener noreferrer'
           className='contact-link'
         >
-          <span className='contact-link-icon'>💼</span>
+          <span className='contact-link-icon'><FaLinkedin size={14} /></span>
           <span>{about.contacts.linkedin.replace('https://', '')}</span>
         </a>
         <a
@@ -53,8 +55,12 @@ export function ContactWindow() {
           rel='noopener noreferrer'
           className='contact-link'
         >
-          <span className='contact-link-icon'>🐙</span>
+          <span className='contact-link-icon'><FaGithub size={14} /></span>
           <span>{about.contacts.github.replace('https://github.com/', '')}</span>
+        </a>
+        <a href={about.contacts.resume} download className='contact-link'>
+          <span className='contact-link-icon'><FiFileText size={14} /></span>
+          <span>baixar currículo</span>
         </a>
       </div>
 

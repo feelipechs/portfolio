@@ -21,7 +21,7 @@ export function MenuBar() {
   return (
     <div className='menubar'>
       <div className='menubar-brand'>
-        <span className='menubar-logo'>chagas.dev</span>
+        <span className='menubar-logo'>feelipechs.dev</span>
         <span className='menubar-slash'>/</span>
       </div>
       <div className='menubar-actions'>

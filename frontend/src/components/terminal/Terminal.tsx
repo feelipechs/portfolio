@@ -18,8 +18,7 @@ export function Terminal() {
 
     pushLine({
       type: 'system',
-      content:
-        'PortfolioOS v1.0.0 — digite "help" para começar, ou use o menu acima',
+      content: 'PortfolioOS v1.0.1 — digite "help" para começar, ou use o menu acima',
     });
     pushLine({ type: 'blank', content: '' });
 
@@ -40,11 +39,7 @@ export function Terminal() {
         <MenuBar />
         <div className='terminal-body'>
           <TerminalOutput lines={lines} currentDirectory={currentDirectory} />
-          <TerminalInput
-            currentDirectory={currentDirectory}
-            isTyping={isTyping}
-            onSubmit={submitCommand}
-          />
+          <TerminalInput currentDirectory={currentDirectory} isTyping={isTyping} onSubmit={submitCommand} />
         </div>
       </div>
 

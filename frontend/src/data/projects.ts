@@ -16,9 +16,20 @@ export const projects: Project[] = [
     description: 'Site institucional pra ONG Educa Surf',
     tech: ['Next.js', 'PostgreSQL', 'Prisma', 'Tailwind', 'Typescript'],
     github: 'https://github.com/feelipechs/educa-surf',
-    demo: 'https://educasurf.vercel.app',
+    demo: null,
     status: 'in-progress',
     images: ['/images/educasurf.webp'],
+  },
+  {
+    id: 'kotlintv',
+    name: 'KotlinTV',
+    description:
+      'IPTV Player para Android TV desenvolvido em Kotlin com Jetpack Compose TV, arquitetura MVVM + Clean Architecture, suporte a Xtream Codes e playlists M3U, reprodução via Media3/ExoPlayer, cache offline com Room e gerenciamento de estado reativo com StateFlow. Focado em simplicidade e otimização.',
+    tech: ['Kotlin', 'Jetpack Compose', 'Media3', 'Room', 'Retrofit', 'Hilt'],
+    github: 'https://github.com/feelipechs/iptv-android-tv',
+    demo: null,
+    status: 'in-progress',
+    images: ['/images/kotlintv.webp'],
   },
   {
     id: 'sfsys',

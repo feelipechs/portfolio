@@ -1,23 +1,24 @@
 # Felipe Chagas — Portfolio
 
-Portfolio pessoal com estética de terminal retrô/CRT, construído com React + Vite + TypeScript.
+Portfolio pessoal com estética de terminal retrô/CRT, e a tela inicial cyberpunk e pixel art. Construído com React + CSS + TypeScript.
 
 ## ✦ Acesse
 
-[feelipechs.vercel.app](https://feelipechs.vercel.app)
+[feelipechs.dev](https://www.feelipechs.dev)
 
 ## ✦ Conceito
 
 Interface inspirada em sistemas operacionais retrô. O site simula um terminal interativo com suporte a comandos reais via teclado e navegação por clique — híbrido entre CLI e GUI.
 
 O fluxo de entrada:
-1. Monitor estilo iMac G3 com animação de zoom
+1. Cenário cyberpunk com um monitor com animação de zoom
 2. Sequência de boot estilo BIOS/Linux
 3. Terminal interativo com janelas draggables
 
 ## ✦ Tecnologias
 
 - **React 19** + **TypeScript**
+- **CSS** — estilização do terminal e interface
 - **Vite** — bundler
 - **Zustand** — gerenciamento de estado
 - **Framer Motion** — animações e janelas

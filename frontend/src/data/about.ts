@@ -10,6 +10,7 @@ export interface About {
     linkedin: string;
     github: string;
     website: string;
+    resume: string;
   };
 }
 
@@ -28,5 +29,6 @@ export const about: About = {
     linkedin: 'https://linkedin.com/in/feelipechs',
     github: 'https://github.com/feelipechs',
     website: '',
+    resume: '/curriculo.pdf',
   },
 };

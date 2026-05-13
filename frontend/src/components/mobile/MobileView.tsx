@@ -1,3 +1,5 @@
+import { FiMail, FiFileText } from 'react-icons/fi';
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { projects } from '../../data/projects';
 import { about } from '../../data/about';
 import { skills } from '../../data/skills';
@@ -93,7 +95,7 @@ export function MobileView() {
           <h2 className='mobile-section-title'>/ contato</h2>
           <div className='mobile-contacts'>
             <a href={`mailto:${about.contacts.email}`} className='mobile-contact-link'>
-              <span className='mobile-contact-icon'>✉</span>
+              <span className='mobile-contact-icon'><FiMail size={16} /></span>
               <span>{about.contacts.email}</span>
             </a>
             <a
@@ -102,7 +104,7 @@ export function MobileView() {
               rel='noopener noreferrer'
               className='mobile-contact-link'
             >
-              <span className='mobile-contact-icon'>💼</span>
+              <span className='mobile-contact-icon'><FaLinkedin size={16} /></span>
               <span>linkedin</span>
             </a>
             <a
@@ -111,8 +113,12 @@ export function MobileView() {
               rel='noopener noreferrer'
               className='mobile-contact-link'
             >
-              <span className='mobile-contact-icon'>🐙</span>
+              <span className='mobile-contact-icon'><FaGithub size={16} /></span>
               <span>github</span>
+            </a>
+            <a href={about.contacts.resume} download className='mobile-contact-link'>
+              <span className='mobile-contact-icon'><FiFileText size={16} /></span>
+              <span>baixar currículo</span>
             </a>
           </div>
         </section>

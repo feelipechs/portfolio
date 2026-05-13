@@ -10,46 +10,29 @@ export interface SkillGroup {
 export const skills: SkillGroup[] = [
   {
     category: 'backend',
-    items: [
-      { name: 'Java' },
-      { name: 'Spring Boot' },
-      { name: 'NestJS' },
-      { name: 'API REST' },
-      { name: 'JWT' },
-    ],
+    items: [{ name: 'Java' }, { name: 'Spring Boot' }, { name: 'NestJS' }, { name: 'API REST' }, { name: 'JWT' }],
   },
   {
     category: 'frontend',
     items: [
+      { name: 'JavaScript' },
       { name: 'React' },
       { name: 'Next.js' },
       { name: 'TypeScript' },
-      { name: 'JavaScript' },
       { name: 'Tailwind' },
       { name: 'Bootstrap' },
     ],
   },
   {
     category: 'dados & infra',
-    items: [{ name: 'PostgreSQL' }, { name: 'MySQL' }, { name: 'Docker' }],
+    items: [{ name: 'PostgreSQL' }, { name: 'MySQL' }, { name: 'Docker' }, { name: 'Podman' }],
   },
   {
     category: 'engenharia',
-    items: [
-      { name: 'SOLID' },
-      { name: 'Design Patterns' },
-      { name: 'UML' },
-      { name: 'Scrum' },
-    ],
+    items: [{ name: 'SOLID' }, { name: 'Design Patterns' }, { name: 'UML' }, { name: 'Scrum' }],
   },
   {
     category: 'ferramentas',
-    items: [
-      { name: 'Figma' },
-      { name: 'Git' },
-      { name: 'Postman' },
-      { name: 'IntelliJ' },
-      { name: 'VS Code' },
-    ],
+    items: [{ name: 'Figma' }, { name: 'Git' }, { name: 'Postman' }],
   },
 ];

@@ -4,27 +4,150 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/code.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Primary SEO -->
+    <title>Felipe Chagas — Full-Stack Developer</title>
     <meta
       name="description"
-      content="Felipe Chagas — Desenvolvedor Full-Stack"
+      content="Portfólio de Felipe Chagas — Desenvolvedor Full-Stack de Guarujá, SP. Java, Spring Boot, React, Next.js, TypeScript. Confira projetos, skills e experiência."
     />
-    <meta property="og:title" content="Felipe Chagas" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://feelipechs.dev" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://feelipechs.dev" />
+    <meta property="og:title" content="Felipe Chagas — Full-Stack Developer" />
     <meta
       property="og:description"
-      content="Portfólio — Full-Stack Software Developer"
+      content="Portfólio de Felipe Chagas — Desenvolvedor Full-Stack. Java, Spring Boot, React, Next.js, TypeScript."
     />
-    <meta property="og:url" content="https://feelipechs.vercel.app" />
     <meta
       property="og:image"
-      content="https://feelipechs.vercel.app/images/og-image.png"
+      content="https://feelipechs.dev/images/og-image.png"
     />
-    <meta property="og:type" content="website" />
-    <title>Felipe Chagas</title>
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Felipe Chagas — Full-Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="Portfólio de Felipe Chagas — Desenvolvedor Full-Stack. Java, Spring Boot, React, Next.js, TypeScript."
+    />
+    <meta
+      name="twitter:image"
+      content="https://feelipechs.dev/images/og-image.png"
+    />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://feelipechs.dev/#person",
+            "name": "Felipe Chagas",
+            "jobTitle": "Full-Stack Software Developer",
+            "email": "flpchagas@outlook.com",
+            "url": "https://feelipechs.dev",
+            "sameAs": [
+              "https://github.com/feelipechs",
+              "https://linkedin.com/in/feelipechs"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Guarujá",
+              "addressRegion": "São Paulo",
+              "addressCountry": "BR"
+            },
+            "knowsAbout": [
+              "Java",
+              "Spring Boot",
+              "React",
+              "Next.js",
+              "TypeScript",
+              "PostgreSQL",
+              "Docker"
+            ]
+          },
+          {
+            "@type": "SoftwareSourceCode",
+            "name": "Educa Surf",
+            "description": "Site institucional para a ONG Educa Surf, Guarujá/SP",
+            "programmingLanguage": [
+              "Next.js",
+              "TypeScript",
+              "PostgreSQL",
+              "Prisma",
+              "Tailwind"
+            ],
+            "codeRepository": "https://github.com/feelipechs/educa-surf",
+            "creator": {
+              "@id": "https://feelipechs.dev/#person"
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Fallback para crawlers sem JS -->
+    <noscript>
+      <div
+        style="
+          padding: 2rem;
+          font-family: system-ui;
+          max-width: 720px;
+          margin: 0 auto;
+        "
+      >
+        <h1>Felipe Chagas — Full-Stack Software Developer</h1>
+        <p>Guarujá, São Paulo · +2 anos de experiência</p>
+        <p>
+          Desenvolvedor Full Stack com foco em sistemas limpos, escaláveis e
+          resilientes.
+        </p>
+        <h2>Tecnologias</h2>
+        <ul>
+          <li>Backend: Java, Spring Boot, NestJS, REST APIs</li>
+          <li>Frontend: React, Next.js, TypeScript, JavaScript</li>
+          <li>Banco de dados: PostgreSQL, MySQL</li>
+          <li>Infra: Docker, Podman</li>
+        </ul>
+        <h2>Projetos</h2>
+        <ul>
+          <li>
+            <strong>Educa Surf</strong> — Site institucional para ONG Educa
+            Surf, Guarujá/SP (Next.js, TypeScript, PostgreSQL)
+          </li>
+        </ul>
+        <p>
+          Contato:
+          <a href="mailto:flpchagas@outlook.com">flpchagas@outlook.com</a>
+        </p>
+        <p>
+          <a href="https://linkedin.com/in/feelipechs">LinkedIn</a> ·
+          <a href="https://github.com/feelipechs">GitHub</a>
+        </p>
+        <p>
+          <em
+            >Ative o JavaScript para a experiência completa com interface de
+            terminal.</em
+          >
+        </p>
+      </div>
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
